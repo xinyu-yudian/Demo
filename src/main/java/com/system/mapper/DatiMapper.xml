@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.system.mapper.DatiMapper" >
+  <resultMap id="BaseResultMap" type="com.system.po.Dati" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stuid" property="stuid" jdbcType="INTEGER" />
+    <result column="zuoyeid" property="zuoyeid" jdbcType="INTEGER" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="fen" property="fen" jdbcType="INTEGER" />
+    <result column="bz" property="bz" jdbcType="VARCHAR" />
+    <result column="riqi" property="riqi" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stuid, zuoyeid, filename, fen, bz, riqi
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.system.po.DatiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dati
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dati
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dati
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.system.po.DatiExample" >
+    delete from dati
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.system.po.Dati" >
+    insert into dati (id, stuid, zuoyeid, 
+      filename, fen, bz, 
+      riqi)
+    values (#{id,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{zuoyeid,jdbcType=INTEGER}, 
+      #{filename,jdbcType=VARCHAR}, #{fen,jdbcType=INTEGER}, #{bz,jdbcType=VARCHAR}, 
+      #{riqi,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.system.po.Dati" >
+    insert into dati
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stuid != null" >
+        stuid,
+      </if>
+      <if test="zuoyeid != null" >
+        zuoyeid,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="fen != null" >
+        fen,
+      </if>
+      <if test="bz != null" >
+        bz,
+      </if>
+      <if test="riqi != null" >
+        riqi,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="zuoyeid != null" >
+        #{zuoyeid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fen != null" >
+        #{fen,jdbcType=INTEGER},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="riqi != null" >
+        #{riqi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.system.po.DatiExample" resultType="java.lang.Integer" >
+    select count(*) from dati
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dati
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null" >
+        stuid = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.zuoyeid != null" >
+        zuoyeid = #{record.zuoyeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fen != null" >
+        fen = #{record.fen,jdbcType=INTEGER},
+      </if>
+      <if test="record.bz != null" >
+        bz = #{record.bz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riqi != null" >
+        riqi = #{record.riqi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dati
+    set id = #{record.id,jdbcType=INTEGER},
+      stuid = #{record.stuid,jdbcType=INTEGER},
+      zuoyeid = #{record.zuoyeid,jdbcType=INTEGER},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      fen = #{record.fen,jdbcType=INTEGER},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      riqi = #{record.riqi,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.system.po.Dati" >
+    update dati
+    <set >
+      <if test="stuid != null" >
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="zuoyeid != null" >
+        zuoyeid = #{zuoyeid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fen != null" >
+        fen = #{fen,jdbcType=INTEGER},
+      </if>
+      <if test="bz != null" >
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="riqi != null" >
+        riqi = #{riqi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.system.po.Dati" >
+    update dati
+    set stuid = #{stuid,jdbcType=INTEGER},
+      zuoyeid = #{zuoyeid,jdbcType=INTEGER},
+      filename = #{filename,jdbcType=VARCHAR},
+      fen = #{fen,jdbcType=INTEGER},
+      bz = #{bz,jdbcType=VARCHAR},
+      riqi = #{riqi,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectdati" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select d.*,s.userName  from  dati d,zuoye z,student s  where d.zuoyeid=z.id and z.teaid=#{teaid} and s.userID=d.stuid
+
+  </select>
+</mapper>
